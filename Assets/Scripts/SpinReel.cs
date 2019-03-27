@@ -44,8 +44,6 @@ public class SpinReel : MonoBehaviour
             
             _slowdownElapsed += Time.deltaTime;
 
-            Debug.Log(_slowdownElapsed);
-            
             if (_slowdownElapsed >= slowdownPeriod)
             {
                 _reelSpeed = SlowDown(_reelSpeed);
@@ -54,7 +52,7 @@ public class SpinReel : MonoBehaviour
         }
     }
 
-    public void StartRotation()
+    public void StartRotation(SymbolType st)
     {
         _reelSpeed = ReelSpeed.Fast;
     }
