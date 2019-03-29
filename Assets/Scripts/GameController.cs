@@ -37,9 +37,10 @@ public class GameController : MonoBehaviour
     private bool CanSpin()
     {
         return
-            !
-            _reelLeft.IsSpinning() ||
-            _reelMid.IsSpinning() ||
-            _reelRight.IsSpinning();
+            !(
+                _reelLeft.IsSpinning() ||
+                _reelMid.IsSpinning() ||
+                _reelRight.IsSpinning()
+            );
     }
 }
