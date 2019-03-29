@@ -1,40 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RotateLever : MonoBehaviour
 {
-    private bool _shouldRotate;
+    private LeverState _leverState;
     private const float _rotateBy = 90;
-    private int _rotationDirection;
     private float _remainingRotation;
-    private float _rotationSpeed;
+
+    public float rotationSpeed;
     
     // Start is called before the first frame update
     void Start()
     {
-        _shouldRotate = true;
-        _rotationDirection = -1;
-        _rotationSpeed = 1;
+        _leverState = LeverState.Idle;
         _remainingRotation = _rotateBy;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_shouldRotate)
+        if (_leverState != LeverState.Idle)
         {
-            float yAngle = _rotationSpeed * _rotationDirection;
+            var rotationDirection = _leverState == LeverState.Down ? -1 : 1;
+
+            float yAngle = rotationSpeed * rotationDirection;
             transform.Rotate(0, yAngle, 0);
 
-            _remainingRotation -= _rotationSpeed;
+            _remainingRotation -= rotationSpeed;
 
             if (_remainingRotation <= 0)
             {
-                _shouldRotate = false;
-                _rotationDirection *= -1;
+                _leverState = ChangeDirection(_leverState);
                 _remainingRotation = _rotateBy;
             }
         }
+    }
+
+    public void PullLever()
+    {
+        _leverState = LeverState.Down;
+    }
+
+    private LeverState ChangeDirection(LeverState ls)
+    {
+        if(ls == LeverState.Down)
+        {
+            return LeverState.Up;
+        }
+
+        return LeverState.Idle;
     }
 }
