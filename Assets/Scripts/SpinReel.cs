@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 public class SpinReel : MonoBehaviour
 {
@@ -14,14 +11,12 @@ public class SpinReel : MonoBehaviour
     public float numberOfSpins = 1.0f;
     private float _degreesTotal;
     private float _degressLeft;
-    
-    // Start is called before the first frame update
+
     void Start()
     {
         _reelSpeed = ReelSpeed.Idle;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (IsSpinning())

@@ -7,15 +7,13 @@ public class RotateLever : MonoBehaviour
     private float _remainingRotation;
 
     public float rotationSpeed;
-    
-    // Start is called before the first frame update
+
     void Start()
     {
         _leverState = LeverState.Idle;
         _remainingRotation = _rotateBy;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_leverState != LeverState.Idle)
