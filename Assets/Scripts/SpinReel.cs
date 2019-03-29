@@ -50,6 +50,9 @@ public class SpinReel : MonoBehaviour
 
     public void StartRotation(SymbolType st)
     {
+        // reset to original angle;
+        transform.Rotate(0, 0, -_degreesTotal);
+
         _degreesTotal = _degressLeft = Symbol.SymbolAngles[st] + 360 * numberOfSpins;
         _reelSpeed = ReelSpeed.Fast;
     }
