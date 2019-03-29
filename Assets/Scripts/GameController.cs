@@ -7,8 +7,6 @@ public class GameController : MonoBehaviour
     private SpinReel _reelMid;
     private SpinReel _reelRight;
 
-    private bool _spinning = false;
-
     private void Awake()
     {
         _reelLeft = GameObject.Find("Reel Left").GetComponent<SpinReel>();
@@ -18,19 +16,27 @@ public class GameController : MonoBehaviour
 
     public void StartSpinning()
     {
-        if (!_spinning)
+        if (CanSpin())
         {
-            Debug.Log("Start Spinning");
-            
-            _spinning = true;
-
             var leftReelSymbol = Symbol.PickRandomSymbol();
             var midReelSymbol = Symbol.PickRandomSymbol();
             var rightReelSymbol = Symbol.PickRandomSymbol();
+            
+            Debug.Log($"{leftReelSymbol} - {midReelSymbol} - {rightReelSymbol}");
 
             _reelLeft.StartRotation(leftReelSymbol);
             _reelMid.StartRotation(midReelSymbol);
             _reelRight.StartRotation(rightReelSymbol);
         }
+    }
+
+    // true if no reels are spinning
+    private bool CanSpin()
+    {
+        return
+            !
+            _reelLeft.IsSpinning() ||
+            _reelMid.IsSpinning() ||
+            _reelRight.IsSpinning();
     }
 }

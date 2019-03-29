@@ -130,10 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1039751b3273f42837577caec49937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeedFast: 30
-  rotationSpeedMedium: 12
+  rotationSpeedFast: 8
+  rotationSpeedMedium: 4
   rotationSpeedSlow: 1
-  slowdownPeriod: 8
+  numberOfSpins: 4
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,10 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1039751b3273f42837577caec49937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeedFast: 30
-  rotationSpeedMedium: 12
+  rotationSpeedFast: 8
+  rotationSpeedMedium: 4
   rotationSpeedSlow: 1
-  slowdownPeriod: 10
+  numberOfSpins: 5
 --- !u!1001 &434462012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -650,10 +650,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d1039751b3273f42837577caec49937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeedFast: 30
-  rotationSpeedMedium: 12
+  rotationSpeedFast: 8
+  rotationSpeedMedium: 4
   rotationSpeedSlow: 1
-  slowdownPeriod: 6
+  numberOfSpins: 3
 --- !u!1 &1489370342
 GameObject:
   m_ObjectHideFlags: 0

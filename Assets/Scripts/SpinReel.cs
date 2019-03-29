@@ -8,22 +8,23 @@ public class SpinReel : MonoBehaviour
     public float rotationSpeedFast = 1.0f;
     public float rotationSpeedMedium = 1.0f;
     public float rotationSpeedSlow = 1.0f;
-    public float slowdownPeriod = 2.0f;
 
-    private float _slowdownElapsed;
     private ReelSpeed _reelSpeed;
+
+    public float numberOfSpins = 1.0f;
+    private float _degreesTotal;
+    private float _degressLeft;
     
     // Start is called before the first frame update
     void Start()
     {
-        _slowdownElapsed = 0.0f;
         _reelSpeed = ReelSpeed.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ShouldRotate())
+        if (IsSpinning())
         {
             float rotationSpeed;
 
@@ -40,40 +41,41 @@ public class SpinReel : MonoBehaviour
                 rotationSpeed = rotationSpeedSlow;
             }
 
-            transform.Rotate(0, 0, -rotationSpeed);
-            
-            _slowdownElapsed += Time.deltaTime;
+            transform.Rotate(0, 0, rotationSpeed);
 
-            if (_slowdownElapsed >= slowdownPeriod)
-            {
-                _reelSpeed = SlowDown(_reelSpeed);
-                _slowdownElapsed = 0;
-            }
+            _degressLeft -= rotationSpeed;
+            _reelSpeed = SlowDown(_reelSpeed);
         }
     }
 
     public void StartRotation(SymbolType st)
     {
+        _degreesTotal = _degressLeft = Symbol.SymbolAngles[st] + 360 * numberOfSpins;
         _reelSpeed = ReelSpeed.Fast;
     }
 
-    private bool ShouldRotate()
+    public bool IsSpinning()
     {
         return _reelSpeed != ReelSpeed.Idle;
     }
 
     private ReelSpeed SlowDown(ReelSpeed rs)
     {
-        if (rs == ReelSpeed.Fast)
+        if(_degressLeft > _degreesTotal * 0.3)
+        {
+            return ReelSpeed.Fast;
+        }
+        else if(_degressLeft > _degreesTotal * 0.1)
         {
             return ReelSpeed.Medium;
         }
-
-        if (rs == ReelSpeed.Medium)
+        else if(_degressLeft > 0)
         {
             return ReelSpeed.Slow;
         }
-
-        return ReelSpeed.Idle;
+        else
+        {
+            return ReelSpeed.Idle;
+        }
     }
 }
