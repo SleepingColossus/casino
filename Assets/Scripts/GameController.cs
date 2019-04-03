@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -7,8 +8,13 @@ public class GameController : MonoBehaviour
     private SpinReel _reelMid;
     private SpinReel _reelRight;
 
+    public SymbolType[] debugMatches;
+    private Queue<SymbolType> _debugQueue;
+
     private void Awake()
     {
+        _debugQueue = new Queue<SymbolType>(debugMatches);
+
         _rotateLever = GameObject.Find("Lever").GetComponent<RotateLever>();
         _reelLeft = GameObject.Find("Reel Left").GetComponent<SpinReel>();
         _reelMid = GameObject.Find("Reel Mid").GetComponent<SpinReel>();
@@ -19,9 +25,23 @@ public class GameController : MonoBehaviour
     {
         if (CanSpin())
         {
-            var leftReelSymbol = Symbol.PickRandomSymbol();
-            var midReelSymbol = Symbol.PickRandomSymbol();
-            var rightReelSymbol = Symbol.PickRandomSymbol();
+            SymbolType leftReelSymbol;
+            SymbolType midReelSymbol;
+            SymbolType rightReelSymbol;
+
+            if (_debugQueue.Count > 0)
+            {
+                var s = _debugQueue.Dequeue();
+
+                leftReelSymbol = midReelSymbol = rightReelSymbol = s;
+            }
+            else
+            {
+                leftReelSymbol = Symbol.PickRandomSymbol();
+                midReelSymbol = Symbol.PickRandomSymbol();
+                rightReelSymbol = Symbol.PickRandomSymbol();
+            }
+
             
             Debug.Log($"{leftReelSymbol} - {midReelSymbol} - {rightReelSymbol}");
 

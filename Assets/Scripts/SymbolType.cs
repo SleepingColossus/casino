@@ -1,3 +1,4 @@
+[System.Serializable]
 public enum SymbolType
 {
     Bar1,
