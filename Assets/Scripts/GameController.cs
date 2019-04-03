@@ -7,9 +7,13 @@ public class GameController : MonoBehaviour
     private SpinReel _reelLeft;
     private SpinReel _reelMid;
     private SpinReel _reelRight;
+    private CoinSpawner _coinSpawner;
 
     public SymbolType[] debugMatches;
     private Queue<SymbolType> _debugQueue;
+
+    private bool _readyForReward = false;
+    private SymbolScore _score = null;
 
     private void Awake()
     {
@@ -19,6 +23,16 @@ public class GameController : MonoBehaviour
         _reelLeft = GameObject.Find("Reel Left").GetComponent<SpinReel>();
         _reelMid = GameObject.Find("Reel Mid").GetComponent<SpinReel>();
         _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
+        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
+    }
+
+    public void Update()
+    {
+        if (_readyForReward && CanSpin())
+        {
+            _coinSpawner.Spawn(_score.NumberOfCoins);
+            _readyForReward = false;
+        }
     }
 
     public void StartSpinning()
@@ -41,9 +55,11 @@ public class GameController : MonoBehaviour
                 midReelSymbol = Symbol.PickRandomSymbol();
                 rightReelSymbol = Symbol.PickRandomSymbol();
             }
-
             
-            Debug.Log($"{leftReelSymbol} - {midReelSymbol} - {rightReelSymbol}");
+            if (leftReelSymbol == midReelSymbol && leftReelSymbol == rightReelSymbol)
+            {
+                SetReward(leftReelSymbol);
+            }
 
             _rotateLever.PullLever();
             _reelLeft.StartRotation(leftReelSymbol);
@@ -61,5 +77,11 @@ public class GameController : MonoBehaviour
                 _reelMid.IsSpinning() ||
                 _reelRight.IsSpinning()
             );
+    }
+
+    private void SetReward(SymbolType s)
+    {
+        _readyForReward = true;
+        _score = Symbol.SymbolValues[s];
     }
 }

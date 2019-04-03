@@ -10,16 +10,26 @@ public static class Symbol
     public const float GrapeAngle  = 240;
     public const float DollarAngle = 300;
 
-    public static Dictionary<SymbolType, float> SymbolAngles = new Dictionary<SymbolType, float>()
+    public static readonly Dictionary<SymbolType, float> SymbolAngles = new Dictionary<SymbolType, float>()
     {
-        {SymbolType.Bar1,   Bar1Angle},
-        {SymbolType.Bar2,   Bar2Angle},
-        {SymbolType.Bell,   BellAngle},
+        {SymbolType.Bar1, Bar1Angle},
+        {SymbolType.Bar2, Bar2Angle},
+        {SymbolType.Bell, BellAngle},
         {SymbolType.Cherry, CherryAngle},
-        {SymbolType.Grape,  GrapeAngle},
+        {SymbolType.Grape, GrapeAngle},
         {SymbolType.Dollar, DollarAngle}
-    }; 
-    
+    };
+
+    public static readonly Dictionary<SymbolType, SymbolScore> SymbolValues = new Dictionary<SymbolType, SymbolScore>()
+    {
+        {SymbolType.Bar1, new SymbolScore(2, 10)},
+        {SymbolType.Bar2, new SymbolScore(2, 10)},
+        {SymbolType.Bell, new SymbolScore(2, 10)},
+        {SymbolType.Cherry, new SymbolScore(2, 10)},
+        {SymbolType.Grape, new SymbolScore(2, 10)},
+        {SymbolType.Dollar, new SymbolScore(2, 10)}
+    };
+
     public static SymbolType PickRandomSymbol()
     {
         var symbols = new SymbolType[]

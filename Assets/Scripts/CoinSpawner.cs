@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpawnCoin : MonoBehaviour
+public class CoinSpawner : MonoBehaviour
 {
     public GameObject coin;
     public Transform spawnArea;
@@ -11,6 +11,8 @@ public class SpawnCoin : MonoBehaviour
 
     private Vector3 _position;
     private Vector3 _scale;
+
+    private int _coinsToSpawn = 0;
 
     void Start()
     {
@@ -23,21 +25,24 @@ public class SpawnCoin : MonoBehaviour
 
     void Update()
     {
-//        if (_readyToSpawn)
-//        {
-//            Spawn();
-//            _readyToSpawn = false;
-//        }
-//        else
-//        {
-//            if (_elapsedSinceSpawn > spawnInterval)
-//            {
-//                _readyToSpawn = true;
-//                _elapsedSinceSpawn = 0;
-//            }
-//        }
-//
-//        _elapsedSinceSpawn += Time.deltaTime;
+        if (_coinsToSpawn > 0)
+        {
+            if (_readyToSpawn)
+            {
+                Spawn();
+                _readyToSpawn = false;
+            }
+            else
+            {
+                if (_elapsedSinceSpawn > spawnInterval)
+                {
+                    _readyToSpawn = true;
+                    _elapsedSinceSpawn = 0;
+                }
+            }
+
+            _elapsedSinceSpawn += Time.deltaTime;
+        }
     }
 
     private void Spawn()
@@ -47,5 +52,12 @@ public class SpawnCoin : MonoBehaviour
 
         var position = new Vector3(x, _position.y, z);
         Instantiate(coin, position, Quaternion.identity);
+        _coinsToSpawn--;
+    }
+
+    public void Spawn(int coinsToSpawn)
+    {
+        _coinsToSpawn = coinsToSpawn;
+        _readyToSpawn = true;
     }
 }
