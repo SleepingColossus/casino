@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -15,6 +17,11 @@ public class GameController : MonoBehaviour
     private bool _readyForReward = false;
     private SymbolScore _score = null;
 
+    public int balance = 0;
+    public Text balanceText;
+    private const string BalanceTextLabel = "Balance:";
+    public int currentSteak;
+
     private void Awake()
     {
         _debugQueue = new Queue<SymbolType>(debugMatches);
@@ -24,12 +31,15 @@ public class GameController : MonoBehaviour
         _reelMid = GameObject.Find("Reel Mid").GetComponent<SpinReel>();
         _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
+
+        UpdateBalance(10000);
     }
 
     public void Update()
     {
         if (_readyForReward && CanSpin())
         {
+            UpdateBalance(currentSteak * _score.SteakMultiplier);
             _coinSpawner.Spawn(_score.NumberOfCoins);
             _readyForReward = false;
         }
@@ -65,6 +75,8 @@ public class GameController : MonoBehaviour
             _reelLeft.StartRotation(leftReelSymbol);
             _reelMid.StartRotation(midReelSymbol);
             _reelRight.StartRotation(rightReelSymbol);
+
+            UpdateBalance(-currentSteak);
         }
     }
 
@@ -83,5 +95,11 @@ public class GameController : MonoBehaviour
     {
         _readyForReward = true;
         _score = Symbol.SymbolValues[s];
+    }
+
+    private void UpdateBalance(int amount)
+    {
+        balance += amount;
+        balanceText.text = $"{BalanceTextLabel} {balance}";
     }
 }

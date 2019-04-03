@@ -22,12 +22,12 @@ public static class Symbol
 
     public static readonly Dictionary<SymbolType, SymbolScore> SymbolValues = new Dictionary<SymbolType, SymbolScore>()
     {
-        {SymbolType.Bar1, new SymbolScore(2, 10)},
-        {SymbolType.Bar2, new SymbolScore(2, 10)},
-        {SymbolType.Bell, new SymbolScore(2, 10)},
+        {SymbolType.Bar1, new SymbolScore(4, 10)},
+        {SymbolType.Bar2, new SymbolScore(8, 10)},
+        {SymbolType.Bell, new SymbolScore(3, 10)},
         {SymbolType.Cherry, new SymbolScore(2, 10)},
         {SymbolType.Grape, new SymbolScore(2, 10)},
-        {SymbolType.Dollar, new SymbolScore(2, 10)}
+        {SymbolType.Dollar, new SymbolScore(10, 10)}
     };
 
     public static SymbolType PickRandomSymbol()
