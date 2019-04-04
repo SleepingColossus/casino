@@ -22,8 +22,8 @@ public class GameController : MonoBehaviour
     private const string BalanceTextLabel = "Balance:";
     public int currentSteak;
 
-    public AudioClip WinClip;
-    public AudioSource WinSource;
+    public AudioClip winSound;
+    private AudioSource _winSource;
 
     private void Awake()
     {
@@ -35,6 +35,8 @@ public class GameController : MonoBehaviour
         _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
 
+        _winSource = GetComponent<AudioSource>();
+        _winSource.clip = winSound;
         UpdateBalance(10000);
     }
 
@@ -44,6 +46,7 @@ public class GameController : MonoBehaviour
         {
             UpdateBalance(currentSteak * _score.SteakMultiplier);
             _coinSpawner.Spawn(_score.NumberOfCoins);
+            _winSource.Play();
             _readyForReward = false;
         }
     }
@@ -104,6 +107,5 @@ public class GameController : MonoBehaviour
     {
         balance += amount;
         balanceText.text = $"{BalanceTextLabel} {balance}";
-        WinSource.Play();
     }
 }
