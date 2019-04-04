@@ -13,6 +13,9 @@ public class SpinReel : MonoBehaviour
     private float _degressLeft;
 
     private AudioSource _audioSource;
+    public float fastPitch;
+    public float mediumPitch;
+    public float slowPitch;
 
     void Start()
     {
@@ -29,14 +32,17 @@ public class SpinReel : MonoBehaviour
             if (_reelSpeed == ReelSpeed.Fast)
             {
                 rotationSpeed = rotationSpeedFast;
+                _audioSource.pitch = fastPitch;
             }
             else if (_reelSpeed == ReelSpeed.Medium)
             {
                 rotationSpeed = rotationSpeedMedium;
+                _audioSource.pitch = mediumPitch;
             }
             else
             {
                 rotationSpeed = rotationSpeedSlow;
+                _audioSource.pitch = slowPitch;
             }
 
             transform.Rotate(0, 0, rotationSpeed);

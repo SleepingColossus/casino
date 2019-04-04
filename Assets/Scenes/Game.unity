@@ -134,6 +134,9 @@ MonoBehaviour:
   rotationSpeedMedium: 4
   rotationSpeedSlow: 1
   numberOfSpins: 4
+  fastPitch: 1
+  mediumPitch: 0.95
+  slowPitch: 0.9
 --- !u!65 &105457926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -350,6 +353,9 @@ MonoBehaviour:
   rotationSpeedMedium: 4
   rotationSpeedSlow: 1
   numberOfSpins: 5
+  fastPitch: 1
+  mediumPitch: 0.95
+  slowPitch: 0.9
 --- !u!65 &426748150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1284,6 +1290,9 @@ MonoBehaviour:
   rotationSpeedMedium: 4
   rotationSpeedSlow: 1
   numberOfSpins: 3
+  fastPitch: 1
+  mediumPitch: 0.95
+  slowPitch: 0.9
 --- !u!65 &1395963002
 BoxCollider:
   m_ObjectHideFlags: 0
