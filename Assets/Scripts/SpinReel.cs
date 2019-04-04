@@ -12,8 +12,11 @@ public class SpinReel : MonoBehaviour
     private float _degreesTotal;
     private float _degressLeft;
 
+    private AudioSource _audioSource;
+
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>();
         _reelSpeed = ReelSpeed.Idle;
     }
 
@@ -50,6 +53,7 @@ public class SpinReel : MonoBehaviour
 
         _degreesTotal = _degressLeft = Symbol.SymbolAngles[st] + 360 * numberOfSpins;
         _reelSpeed = ReelSpeed.Fast;
+        _audioSource.Play();
     }
 
     public bool IsSpinning()
