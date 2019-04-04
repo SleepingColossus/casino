@@ -8,16 +8,23 @@ public class RotateLever : MonoBehaviour
 
     public float rotationSpeed;
 
+    public AudioClip LeverSound;
+
+    public AudioSource LeverSource;
+
+
     void Start()
     {
         _leverState = LeverState.Idle;
         _remainingRotation = _rotateBy;
+        LeverSource.clip = LeverSound;
     }
 
     void Update()
     {
         if (_leverState != LeverState.Idle)
         {
+
             var rotationDirection = _leverState == LeverState.Down ? -1 : 1;
 
             float yAngle = rotationSpeed * rotationDirection;
@@ -35,6 +42,7 @@ public class RotateLever : MonoBehaviour
 
     public void PullLever()
     {
+        LeverSource.Play();
         _leverState = LeverState.Down;
     }
 

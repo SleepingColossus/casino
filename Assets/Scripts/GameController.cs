@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour
     private const string BalanceTextLabel = "Balance:";
     public int currentSteak;
 
+    public AudioClip WinClip;
+    public AudioSource WinSource;
+
     private void Awake()
     {
         _debugQueue = new Queue<SymbolType>(debugMatches);
@@ -101,5 +104,6 @@ public class GameController : MonoBehaviour
     {
         balance += amount;
         balanceText.text = $"{BalanceTextLabel} {balance}";
+        WinSource.Play();
     }
 }
