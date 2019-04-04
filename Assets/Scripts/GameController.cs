@@ -23,7 +23,8 @@ public class GameController : MonoBehaviour
     public int currentSteak;
 
     public AudioClip winSound;
-    private AudioSource _winSource;
+    public AudioClip jackPotSound;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
@@ -35,8 +36,7 @@ public class GameController : MonoBehaviour
         _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
 
-        _winSource = GetComponent<AudioSource>();
-        _winSource.clip = winSound;
+        _audioSource = GetComponent<AudioSource>();
         UpdateBalance(10000);
     }
 
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
         {
             UpdateBalance(currentSteak * _score.SteakMultiplier);
             _coinSpawner.Spawn(_score.NumberOfCoins);
-            _winSource.Play();
+            _audioSource.Play();
             _readyForReward = false;
         }
     }
@@ -101,6 +101,15 @@ public class GameController : MonoBehaviour
     {
         _readyForReward = true;
         _score = Symbol.SymbolValues[s];
+
+        if (s == SymbolType.Dollar)
+        {
+            _audioSource.clip = jackPotSound;
+        }
+        else
+        {
+            _audioSource.clip = winSound;
+        }
     }
 
     private void UpdateBalance(int amount)
