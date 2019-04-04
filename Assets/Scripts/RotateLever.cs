@@ -8,16 +8,13 @@ public class RotateLever : MonoBehaviour
 
     public float rotationSpeed;
 
-    public AudioClip leverSound;
-    private AudioSource _leverSource;
-
+    private AudioSource _audioSource;
 
     void Start()
     {
         _leverState = LeverState.Idle;
         _remainingRotation = _rotateBy;
-        _leverSource = GetComponent<AudioSource>();
-        _leverSource.clip = leverSound;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,7 +39,7 @@ public class RotateLever : MonoBehaviour
 
     public void PullLever()
     {
-        _leverSource.Play();
+        _audioSource.Play();
         _leverState = LeverState.Down;
     }
 
