@@ -77,6 +77,7 @@ public class SpinReel : MonoBehaviour
         }
         else
         {
+            _audioSource.Stop();
             return ReelSpeed.Idle;
         }
     }
