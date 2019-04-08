@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +25,7 @@ public class GameController : MonoBehaviour
     private AudioSource _audioSource;
 
     public int wager;
+    public Text betLog;
 
     private void Awake()
     {
@@ -118,6 +118,7 @@ public class GameController : MonoBehaviour
     {
         balance += amount;
         balanceText.text = $"{BalanceTextLabel} {balance}";
+        betLog.text += $"\n{amount}";
     }
 
     public void SetWager(int wagerValue)
