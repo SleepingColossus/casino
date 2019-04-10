@@ -625,8 +625,8 @@ MonoBehaviour:
   rotationSpeedSlow: 1
   numberOfSpins: 5
   fastPitch: 1
-  mediumPitch: 0.95
-  slowPitch: 0.9
+  mediumPitch: 0.98
+  slowPitch: 0.96
 --- !u!65 &426748150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2911,7 +2911,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a6df4e56d47141e49b5b181c75623ed2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1820ae97e092ffb41bcea096bbe76a99, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
