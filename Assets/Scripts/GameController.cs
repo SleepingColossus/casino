@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     private SpinReel _reelMid;
     private SpinReel _reelRight;
     private CoinSpawner _coinSpawner;
+    private ButtonManager _buttonManager;
 
     public SymbolType[] debugMatches;
     private Queue<SymbolType> _debugQueue;
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
     private bool _readyForReward = false;
     private SymbolScore _score = null;
 
+    public int initialBalance;
     public int balance = 0;
     public Text balanceText;
     private const string BalanceTextLabel = "Balance:";
@@ -36,10 +38,11 @@ public class GameController : MonoBehaviour
         _reelMid = GameObject.Find("Reel Mid").GetComponent<SpinReel>();
         _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
+        _buttonManager = GameObject.Find("ButtonManager").GetComponent<ButtonManager>();
         wager = 100;
 
         _audioSource = GetComponent<AudioSource>();
-        UpdateBalance(10000);
+        UpdateBalance(initialBalance);
     }
 
     public void Update()
@@ -119,6 +122,7 @@ public class GameController : MonoBehaviour
         balance += amount;
         balanceText.text = $"{BalanceTextLabel} {balance}";
         betLog.text += $"\n{amount}";
+        _buttonManager.SetButtonState(balance);
     }
 
     public void SetWager(int wagerValue)

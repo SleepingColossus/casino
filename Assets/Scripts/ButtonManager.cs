@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonStyler : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     public Button wager10Button;
     public Button wager100Button;
@@ -12,10 +12,11 @@ public class ButtonStyler : MonoBehaviour
     public Button muteMusicButton;
     public Button muteSoundButton;
 
+    public Button spinButton;
+
     private readonly Color _activeColor = Color.yellow;
     private readonly Color _inactiveColor = Color.white;
-    
-    
+
     void Awake()
     {
         wager100Button.image.color = _activeColor;
@@ -41,5 +42,13 @@ public class ButtonStyler : MonoBehaviour
     public void ToggleColor(Button b)
     {
         b.image.color = b.image.color == _inactiveColor ? _activeColor : _inactiveColor;
+    }
+
+    public void SetButtonState(int remainingBalance)
+    {
+        wager1000Button.interactable = remainingBalance >= 1000;
+        wager100Button.interactable = remainingBalance >= 100;
+        wager10Button.interactable = remainingBalance >= 10;
+        spinButton.interactable = remainingBalance > 0;
     }
 }
