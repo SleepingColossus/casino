@@ -57,7 +57,7 @@ public class SpinReel : MonoBehaviour
         // reset to original angle;
         transform.Rotate(0, 0, -_degreesTotal);
 
-        _degreesTotal = _degressLeft = Symbol.SymbolAngles[st] + 360 * numberOfSpins;
+        _degreesTotal = _degressLeft = Symbol.SymbolMetadata[st].Angle + 360 * numberOfSpins;
         _reelSpeed = ReelSpeed.Fast;
         _audioSource.Play();
     }

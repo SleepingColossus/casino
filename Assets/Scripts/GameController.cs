@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     private Queue<SymbolType> _debugQueue;
 
     private bool _readyForReward;
-    private SymbolScore _score;
+    private Reward _reward;
 
     public int initialBalance;
     private int _balance;
@@ -28,8 +28,8 @@ public class GameController : MonoBehaviour
     {
         if (_readyForReward && CanSpin())
         {
-            UpdateBalance(_wager * _score.SteakMultiplier);
-            coinSpawner.Spawn(_score.NumberOfCoins);
+            UpdateBalance(_wager * _reward.SteakMultiplier);
+            coinSpawner.Spawn(_reward.NumberOfCoins);
             audioController.PlayMatchSound();
             _readyForReward = false;
         }
@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
     private void SetReward(SymbolType s)
     {
         _readyForReward = true;
-        _score = Symbol.SymbolValues[s];
+        _reward = Symbol.SymbolMetadata[s].Reward;
 
         audioController.SetMatchSound(s);
     }

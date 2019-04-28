@@ -1,6 +1,6 @@
-public class SymbolScore
+public class Reward
 {
-    public SymbolScore(int steakMultiplier, int numberOfCoins)
+    public Reward(int steakMultiplier, int numberOfCoins)
     {
         SteakMultiplier = steakMultiplier;
         NumberOfCoins = numberOfCoins;
