@@ -14,11 +14,11 @@ public class GameController : MonoBehaviour
     public SymbolType[] debugMatches;
     private Queue<SymbolType> _debugQueue;
 
-    private bool _readyForReward = false;
-    private SymbolScore _score = null;
+    private bool _readyForReward;
+    private SymbolScore _score;
 
     public int initialBalance;
-    public int balance = 0;
+    private int _balance;
     public Text balanceText;
     private const string BalanceTextLabel = "Balance:";
 
@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
     public AudioClip jackPotSound;
     private AudioSource _audioSource;
 
-    public int wager;
+    private int _wager;
     public Text betLog;
 
     private void Awake()
@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour
         _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
         _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
         _buttonManager = GameObject.Find("ButtonManager").GetComponent<ButtonManager>();
-        wager = 100;
+        _wager = 100;
 
         _audioSource = GetComponent<AudioSource>();
         UpdateBalance(initialBalance);
@@ -49,15 +49,17 @@ public class GameController : MonoBehaviour
     {
         if (_readyForReward && CanSpin())
         {
-            UpdateBalance(wager * _score.SteakMultiplier);
+            UpdateBalance(_wager * _score.SteakMultiplier);
             _coinSpawner.Spawn(_score.NumberOfCoins);
             _audioSource.Play();
             _readyForReward = false;
         }
     }
 
-    public void StartSpinning()
+    public void Spin(int wager)
     {
+        _wager = wager;
+
         if (CanSpin())
         {
             SymbolType leftReelSymbol;
@@ -87,7 +89,7 @@ public class GameController : MonoBehaviour
             _reelMid.StartRotation(midReelSymbol);
             _reelRight.StartRotation(rightReelSymbol);
 
-            UpdateBalance(-wager);
+            UpdateBalance(-_wager);
         }
     }
 
@@ -119,14 +121,9 @@ public class GameController : MonoBehaviour
 
     private void UpdateBalance(int amount)
     {
-        balance += amount;
-        balanceText.text = $"{BalanceTextLabel} {balance}";
+        _balance += amount;
+        balanceText.text = $"{BalanceTextLabel} {_balance}";
         betLog.text += $"\n{amount}";
-        _buttonManager.SetButtonState(balance);
-    }
-
-    public void SetWager(int wagerValue)
-    {
-        wager = wagerValue;
+        _buttonManager.SetButtonState(_balance);
     }
 }
