@@ -739,8 +739,9 @@ GameObject:
   m_Component:
   - component: {fileID: 341761764}
   - component: {fileID: 341761763}
+  - component: {fileID: 341761765}
   m_Layer: 0
-  m_Name: ButtonManager
+  m_Name: ButtonController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -775,6 +776,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &341761765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341761762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd08109f48f7474c8173e3ec081c298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wager10Button: {fileID: 608177128}
+  wager100Button: {fileID: 800926833}
+  wager1000Button: {fileID: 2060736492}
 --- !u!1 &426748145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: b4d45e90042e56843a339cbe6de436b4,
@@ -1384,6 +1400,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677336930}
   m_CullTransparentMesh: 0
+--- !u!1 &692886754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692886756}
+  - component: {fileID: 692886755}
+  m_Layer: 0
+  m_Name: MotionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &692886755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692886754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00083c52f1dc9c48a85a085dccf7ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lever: {fileID: 986774088}
+  reels:
+  - {fileID: 1395963001}
+  - {fileID: 105457922}
+  - {fileID: 426748149}
+--- !u!4 &692886756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692886754}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704430818
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,6 +2073,9 @@ MonoBehaviour:
   winSound: {fileID: 8300000, guid: b27bc37def8170048a17276f7ba3cb77, type: 3}
   jackPotSound: {fileID: 8300000, guid: c5b0c89ee5989654aa9a17d16622df4f, type: 3}
   betLog: {fileID: 1362551961}
+  motionController: {fileID: 692886755}
+  buttonController: {fileID: 341761763}
+  coinSpawner: {fileID: 2011385632}
 --- !u!222 &1209472577
 CanvasRenderer:
   m_ObjectHideFlags: 0

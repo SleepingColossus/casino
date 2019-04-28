@@ -4,13 +4,6 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    private RotateLever _rotateLever;
-    private SpinReel _reelLeft;
-    private SpinReel _reelMid;
-    private SpinReel _reelRight;
-    private CoinSpawner _coinSpawner;
-    private ButtonManager _buttonManager;
-
     public SymbolType[] debugMatches;
     private Queue<SymbolType> _debugQueue;
 
@@ -29,18 +22,13 @@ public class GameController : MonoBehaviour
     private int _wager;
     public Text betLog;
 
+    public MotionController motionController;
+    public ButtonController buttonController;
+    public CoinSpawner coinSpawner;
+
     private void Awake()
     {
         _debugQueue = new Queue<SymbolType>(debugMatches);
-
-        _rotateLever = GameObject.Find("Lever").GetComponent<RotateLever>();
-        _reelLeft = GameObject.Find("Reel Left").GetComponent<SpinReel>();
-        _reelMid = GameObject.Find("Reel Mid").GetComponent<SpinReel>();
-        _reelRight = GameObject.Find("Reel Right").GetComponent<SpinReel>();
-        _coinSpawner = GameObject.Find("CoinSpawner").GetComponent<CoinSpawner>();
-        _buttonManager = GameObject.Find("ButtonManager").GetComponent<ButtonManager>();
-        _wager = 100;
-
         _audioSource = GetComponent<AudioSource>();
         UpdateBalance(initialBalance);
     }
@@ -50,7 +38,7 @@ public class GameController : MonoBehaviour
         if (_readyForReward && CanSpin())
         {
             UpdateBalance(_wager * _score.SteakMultiplier);
-            _coinSpawner.Spawn(_score.NumberOfCoins);
+            coinSpawner.Spawn(_score.NumberOfCoins);
             _audioSource.Play();
             _readyForReward = false;
         }
@@ -84,10 +72,7 @@ public class GameController : MonoBehaviour
                 SetReward(leftReelSymbol);
             }
 
-            _rotateLever.PullLever();
-            _reelLeft.StartRotation(leftReelSymbol);
-            _reelMid.StartRotation(midReelSymbol);
-            _reelRight.StartRotation(rightReelSymbol);
+            motionController.InitiateMotion(new []{leftReelSymbol, midReelSymbol, rightReelSymbol});
 
             UpdateBalance(-_wager);
         }
@@ -96,12 +81,7 @@ public class GameController : MonoBehaviour
     // true if no reels are spinning
     private bool CanSpin()
     {
-        return
-            !(
-                _reelLeft.IsSpinning() ||
-                _reelMid.IsSpinning() ||
-                _reelRight.IsSpinning()
-            );
+        return !motionController.AreReelsSpinning();
     }
 
     private void SetReward(SymbolType s)
@@ -124,6 +104,6 @@ public class GameController : MonoBehaviour
         _balance += amount;
         balanceText.text = $"{BalanceTextLabel} {_balance}";
         betLog.text += $"\n{amount}";
-        _buttonManager.SetButtonState(_balance);
+        buttonController.SetButtonState(_balance);
     }
 }
