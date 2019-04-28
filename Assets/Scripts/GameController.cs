@@ -12,18 +12,15 @@ public class GameController : MonoBehaviour
 
     public int initialBalance;
     private int _balance;
-    public Text balanceText;
-    private const string BalanceTextLabel = "Balance:";
 
     public AudioClip winSound;
     public AudioClip jackPotSound;
     private AudioSource _audioSource;
 
     private int _wager;
-    public Text betLog;
 
     public MotionController motionController;
-    public ButtonController buttonController;
+    public UIController uiController;
     public CoinSpawner coinSpawner;
 
     private void Awake()
@@ -102,8 +99,6 @@ public class GameController : MonoBehaviour
     private void UpdateBalance(int amount)
     {
         _balance += amount;
-        balanceText.text = $"{BalanceTextLabel} {_balance}";
-        betLog.text += $"\n{amount}";
-        buttonController.SetButtonState(_balance);
+        uiController.UpdateUIState(_balance);
     }
 }

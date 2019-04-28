@@ -739,9 +739,8 @@ GameObject:
   m_Component:
   - component: {fileID: 341761764}
   - component: {fileID: 341761763}
-  - component: {fileID: 341761765}
   m_Layer: 0
-  m_Name: ButtonController
+  m_Name: UIController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -776,21 +775,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &341761765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341761762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abd08109f48f7474c8173e3ec081c298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wager10Button: {fileID: 608177128}
-  wager100Button: {fileID: 800926833}
-  wager1000Button: {fileID: 2060736492}
 --- !u!1 &426748145 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100006, guid: b4d45e90042e56843a339cbe6de436b4,
@@ -2074,7 +2058,7 @@ MonoBehaviour:
   jackPotSound: {fileID: 8300000, guid: c5b0c89ee5989654aa9a17d16622df4f, type: 3}
   betLog: {fileID: 1362551961}
   motionController: {fileID: 692886755}
-  buttonController: {fileID: 341761763}
+  uiController: {fileID: 341761763}
   coinSpawner: {fileID: 2011385632}
 --- !u!222 &1209472577
 CanvasRenderer:
