@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public UIController uiController;
     public CoinSpawner coinSpawner;
     public AudioController audioController;
+    public GameOverController gameOverController;
 
     private void Awake()
     {
@@ -26,12 +27,17 @@ public class GameController : MonoBehaviour
 
     public void Update()
     {
-        if (_readyForReward && CanSpin())
+        if (_readyForReward && CanSpin)
         {
             UpdateBalance(_wager * _reward.SteakMultiplier);
             coinSpawner.Spawn(_reward.NumberOfCoins);
             audioController.PlayMatchSound();
             _readyForReward = false;
+        }
+
+        if (_balance <= 0 && CanSpin)
+        {
+            gameOverController.EndGame();
         }
     }
 
@@ -39,7 +45,7 @@ public class GameController : MonoBehaviour
     {
         _wager = wager;
 
-        if (CanSpin())
+        if (CanSpin)
         {
             SymbolType leftReelSymbol;
             SymbolType midReelSymbol;
@@ -70,10 +76,7 @@ public class GameController : MonoBehaviour
     }
 
     // true if no reels are spinning
-    private bool CanSpin()
-    {
-        return !motionController.AreReelsSpinning();
-    }
+    private bool CanSpin => !motionController.AreReelsSpinning();
 
     private void SetReward(SymbolType s)
     {
