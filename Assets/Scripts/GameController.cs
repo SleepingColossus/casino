@@ -11,21 +11,16 @@ public class GameController : MonoBehaviour
 
     public int initialBalance;
     private int _balance;
-
-    public AudioClip winSound;
-    public AudioClip jackPotSound;
-    private AudioSource _audioSource;
-
     private int _wager;
 
     public MotionController motionController;
     public UIController uiController;
     public CoinSpawner coinSpawner;
+    public AudioController audioController;
 
     private void Awake()
     {
         _debugQueue = new Queue<SymbolType>(debugMatches);
-        _audioSource = GetComponent<AudioSource>();
         UpdateBalance(initialBalance);
     }
 
@@ -35,7 +30,7 @@ public class GameController : MonoBehaviour
         {
             UpdateBalance(_wager * _score.SteakMultiplier);
             coinSpawner.Spawn(_score.NumberOfCoins);
-            _audioSource.Play();
+            audioController.PlayMatchSound();
             _readyForReward = false;
         }
     }
@@ -85,14 +80,7 @@ public class GameController : MonoBehaviour
         _readyForReward = true;
         _score = Symbol.SymbolValues[s];
 
-        if (s == SymbolType.Dollar)
-        {
-            _audioSource.clip = jackPotSound;
-        }
-        else
-        {
-            _audioSource.clip = winSound;
-        }
+        audioController.SetMatchSound(s);
     }
 
     private void UpdateBalance(int amount)
