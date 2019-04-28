@@ -12,7 +12,7 @@ public class CoinSpawner : MonoBehaviour
     private Vector3 _position;
     private Vector3 _scale;
 
-    private int _coinsToSpawn = 0;
+    private int _coinsToSpawn;
 
     void Start()
     {
