@@ -549,6 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   light: {fileID: 170076734}
   gameOverText: {fileID: 668480027}
+  audioController: {fileID: 1938751252}
 --- !u!1 &338855281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2544,7 @@ MonoBehaviour:
   - {fileID: 426748152}
   basicMatchSound: {fileID: 8300000, guid: b27bc37def8170048a17276f7ba3cb77, type: 3}
   jackpotMatchSound: {fileID: 8300000, guid: c5b0c89ee5989654aa9a17d16622df4f, type: 3}
+  gameOverSound: {fileID: 8300000, guid: bd22c3caf35cdf74bb58f19cb955220c, type: 3}
 --- !u!4 &1938751253
 Transform:
   m_ObjectHideFlags: 0
