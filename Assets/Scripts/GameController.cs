@@ -89,6 +89,6 @@ public class GameController : MonoBehaviour
     private void UpdateBalance(int amount)
     {
         _balance += amount;
-        uiController.UpdateUIState(_balance);
+        uiController.UpdateUIState(_balance, amount);
     }
 }

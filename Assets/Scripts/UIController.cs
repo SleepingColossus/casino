@@ -20,8 +20,23 @@ public class UIController : MonoBehaviour
     private readonly Color _activeColor = Color.yellow;
     private readonly Color _inactiveColor = Color.white;
 
+    private readonly Color _winColor = Color.green;
+    private readonly Color _loseColor = Color.red;
+
     public Text balanceText;
+    public Text balanceChangeIndicatorText;
+
     private const string BalanceTextLabel = "Balance:";
+
+    private void Update()
+    {
+        var color = balanceChangeIndicatorText.color;
+
+        if (color.a > 0)
+        {
+            balanceChangeIndicatorText.color = new Color(color.r, color.g, color.b, color.a -0.01f);
+        }
+    }
 
     public void ToggleColor(Button b)
     {
@@ -42,10 +57,11 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public void UpdateUIState(int balance)
+    public void UpdateUIState(int balance, int delta)
     {
         UpdateButtonState(balance);
         UpdateBalanceText(balance);
+        UpdateBalanceChangeIndicatorText(delta);
     }
 
     private void UpdateButtonState(int balance)
@@ -58,5 +74,19 @@ public class UIController : MonoBehaviour
     private void UpdateBalanceText(int balance)
     {
         balanceText.text = $"{BalanceTextLabel} {balance}";
+    }
+
+    private void UpdateBalanceChangeIndicatorText(int delta)
+    {
+        if (delta > 0)
+        {
+            balanceChangeIndicatorText.text = $"+{delta}";
+            balanceChangeIndicatorText.color = _winColor;
+        }
+        else
+        {
+            balanceChangeIndicatorText.text = delta.ToString();
+            balanceChangeIndicatorText.color = _loseColor;
+        }
     }
 }
