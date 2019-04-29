@@ -10,6 +10,7 @@ public class AudioController : MonoBehaviour
 
     public AudioClip basicMatchSound;
     public AudioClip jackpotMatchSound;
+    public AudioClip gameOverSound;
     private AudioSource _audioSource;
 
     public void Start()
@@ -42,5 +43,11 @@ public class AudioController : MonoBehaviour
     public void SetMatchSound(SymbolType s)
     {
         _audioSource.clip = s == SymbolType.Dollar ? jackpotMatchSound : basicMatchSound;
+    }
+
+    public void PlayGameOverSound()
+    {
+        _audioSource.clip = gameOverSound;
+        _audioSource.Play();
     }
 }

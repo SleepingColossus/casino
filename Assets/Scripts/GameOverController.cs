@@ -7,6 +7,7 @@ public class GameOverController : MonoBehaviour
 {
     public Light light;
     public Text gameOverText;
+    public AudioController audioController;
 
     private bool _gameOver;
 
@@ -21,6 +22,10 @@ public class GameOverController : MonoBehaviour
 
     public void EndGame()
     {
-        _gameOver = true;
+        if (!_gameOver)
+        {
+            _gameOver = true;
+            audioController.PlayGameOverSound();
+        }
     }
 }
