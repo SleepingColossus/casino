@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TableWood
+  m_Name: WheelNumber
   m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b184d880aa54acf40ab7318e679872a7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 52749afa104125c48be6582ca4f12648, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
